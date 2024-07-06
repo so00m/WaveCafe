@@ -4,11 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MailfromClient>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Message>
  */
-class MailfromClientFactory extends Factory
+class MessageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,7 @@ class MailfromClientFactory extends Factory
     public function definition(): array
     {
         return [
-            'full_name' => fake()->name(),
+            'full_name' => fake()-> name(),
             'email'=> fake()->unique()->safeEmail(),
             'content'=>fake()->sentence(),
         ];

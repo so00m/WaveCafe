@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class MailFromClient extends Mailable
 {
@@ -16,9 +17,9 @@ class MailFromClient extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public array $data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -27,7 +28,8 @@ class MailFromClient extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mail From Client',
+            from: new Address($this->data['email'],
+            $this->data['full_name']),
         );
     }
 
@@ -37,9 +39,13 @@ class MailFromClient extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.mailFromClient',
+            with:[
+                'data'=>$this->data
+            ]
         );
     }
+
 
     /**
      * Get the attachments for the message.

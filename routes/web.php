@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
-
+use App\Http\Controllers\EmailController;
 
 
 
@@ -16,8 +16,7 @@ use App\Http\Controllers\MessageController;
 
 
 //site routes
-Route::get('/index', [FrontPageController::class,'index']);
-
+Route::get('/index', [FrontPageController::class,'index'])->name('index');
 
 
 //Authantication routes
@@ -53,19 +52,17 @@ Route::put('updateCategory/{id}', [CategoryController::class, 'update'])->name('
 Route::delete('deleteCategory', [CategoryController::class, 'destroy'])->name('deleteCategory');
 
 //messages routes
-Route::get('messages',[MessageController::class, 'index'])->name('messages');
-Route::get('addMessage',[MessageController::class, 'create'])->name('addMessage');
-Route::post('insertMessage', [MessageController::class,'store'])->name('insertMessage');
-Route::get('editMessage/{id}', [MessageController::class, 'edit'])->name('editMessage');
-Route::get('showMessage/{id}', [MessageController::class, 'show'])->name('showMessage');
-Route::delete('deleteMessage', [MessageController::class, 'destroy'])->name('deleteMessage');
+Route::get('messages',[EmailController::class, 'index'])->name('messages');
+Route::post('insertMessage', [EmailController::class,'store'])->name('insertMessage');
+Route::get('showMessage/{id}', [EmailController::class, 'show'])->name('showMessage');
+Route::delete('deleteMessage', [EmailController::class, 'destroy'])->name('deleteMessage');
 
 });
 
 
 
 
-
+Route::get('notifications/read', function() { auth()->user()->unreadNotifications->markAsRead(); return redirect()->back();})->name('notifications.read');
 
 
 

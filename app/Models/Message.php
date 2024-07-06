@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class MailfromClient extends Model
+
+class Message extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $table = 'mail_from_clients';
+    protected $table = 'messages';
 
     protected $fillable =[
         'full_name',
