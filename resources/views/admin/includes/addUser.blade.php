@@ -69,7 +69,7 @@
                             <div class="item form-group">
                                 <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input id="email" class="form-control" type="email" name="email" required="required">
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email"  required="required">
                                     <p style="color:rgb(117, 2, 2) ;waight:bold">
                                         @error('email'){{ $message }}@enderror
                                     </p>
@@ -79,7 +79,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="active" class="flat">
+                                        <input type="checkbox" name="active"value="{{ old('active') }}"  class="flat">
                                     </label>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="password" id="password" name="password" required="required" class="form-control">
+                                    <input type="password"  name="password" value="{{ old('password') }}" id="password" required="required" class="form-control">
                                     <p style="color:rgb(117, 2, 2) ;waight:bold">
                                         @error('password'){{ $message }} @enderror
                                     </p>
