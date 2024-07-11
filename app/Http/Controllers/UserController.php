@@ -106,7 +106,8 @@ class UserController extends Controller
                 'email.required' => 'Please enter your email',
                 'email.email'=>'Please insert a valid email ',
                 'email.unique'=>'that email is registered before',
-                'password.min' => 'Password must be minimum 8 characters ',
+                'password.min' => 'less than 8 characters',
+                'password.max' => 'Too much characters', 
             ];
         }
 
