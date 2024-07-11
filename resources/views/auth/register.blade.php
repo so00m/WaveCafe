@@ -79,6 +79,16 @@
               </div>
 
               <div>
+                <input id="user_name" type="text" class="form-control @error('user_name') is-invalid @enderror"
+                 name="user_name" placeholder="User name"  value="{{ old('user_name') }}" required autofocus/>
+                @error('user_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+
+              <div>
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                  name="email"  placeholder="Email" value="{{ old('email') }}" required />
                 @error('email')

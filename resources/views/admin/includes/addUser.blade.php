@@ -56,13 +56,13 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="user-name">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="user_name">
                                     Username <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text"  name="user-name" value="{{ old('user-name') }}" id="user-name" required="required" class="form-control">
+                                    <input type="text"  name="user_name" value="{{ old('user_name') }}" id="user_name" required="required" class="form-control">
                                     <p style="color:rgb(117, 2, 2) ;waight:bold">
-                                        @error('user-name'){{ $message }}@enderror
+                                        @error('user_name'){{ $message }}@enderror
                                     </p>
                                 </div>
                             </div>

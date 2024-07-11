@@ -12,8 +12,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all(); 
-        return view('admin.users', compact('users'));
+        $users = User::get(); 
+        return view('dashboard', compact('users'));
     }
 
     /**
@@ -35,7 +35,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'user-name' => 'required|string|max:255|unique:users',
+            'user_name' => 'required|string|max:255|unique:users',
              ] , $messages);
 
         $data['active']=isset($request->active);
@@ -74,13 +74,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'user-name' => 'required|string|max:255|unique:users',
+            'user_name' => 'required|string|max:255|unique:users',
             ] , $messages);
 
             $data['active']=isset($request->active);
 
         User::where('id',$id)->update($data);
-        return redirect()->route('users')->with('success', 'User updated successfully!');
+        return redirect()->route('dashboard')->with('success', 'User updated successfully!');
 
     }
 
@@ -90,7 +90,7 @@ class UserController extends Controller
     {
         $id=$request->id;
         User::where('id',$id)->delete();
-        return redirect()->route('users')->with('success', 'User deleted successfully!');
+        return redirect()->route('dashboard')->with('success', 'User deleted successfully!');
     }
 
 
@@ -100,14 +100,17 @@ class UserController extends Controller
             return [
                 'name.required' => ' Please enter your full name.',
                 'name.max' => 'Too much characters inserted', 
-                'user-name.required' => 'Please enter your user name',
-                'user-name.max' => 'Too much characters inserted',
-                'user-name.unique' => 'Sorry, user name has been used before,try another one', 
+                'user_name.required' => 'Please enter your user name',
+                'user_name.max' => 'Too much characters inserted',
+                'user_name.unique' => 'Sorry, user name has been used before,try another one', 
                 'email.required' => 'Please enter your email',
                 'email.email'=>'Please insert a valid email ',
+                'email.max'=>'Too much characters',
                 'email.unique'=>'that email is registered before',
+                'password.required' => 'Please enter a strong password',
                 'password.min' => 'less than 8 characters',
-                'password.max' => 'Too much characters', 
+                'password.max' => 'Too much characters',
+
             ];
         }
 

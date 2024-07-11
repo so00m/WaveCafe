@@ -20,7 +20,6 @@ Route::get('index', [FrontPageController::class,'index'])->name('index');
 Auth::routes(['verify'=>true]);
 Route::get('/logout', function () { Auth::logout(); return redirect('login'); })->name('logout');
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware('verified')->name('dashboard'); //users page
-Route::get('/auth/verify', function() {return view('auth.verify');})->name('verification.notice');  
 
 
 Route::prefix('admin')->middleware('verified')->group(function () {
@@ -34,6 +33,7 @@ Route::put('updateBeverage/{id}', [BeverageController::class, 'update'])->name('
 Route::delete('deleteBeverage', [BeverageController::class, 'destroy'])->name('deleteBeverage');
 
 //user resource routes
+Route::get('users',[UserController::class, 'index'])->name('users');
 Route::get('addUser',[UserController::class, 'create'])->name('addUser');
 Route::post('insertUser', [UserController::class,'store'])->name('insertUser');
 Route::get('editUser/{id}', [UserController::class, 'edit'])->name('editUser');

@@ -18,8 +18,8 @@
               @csrf
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control @error('login') is-invalid @enderror" name="login" placeholder="Username or Email" value="{{ old('login') }}" required autofocus />
-                @error('login')
+                <input type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" placeholder="Username" value="{{ old('user_name') }}" required autofocus />
+                @error('user_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

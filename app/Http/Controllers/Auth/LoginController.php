@@ -54,19 +54,66 @@ class LoginController extends Controller
 
     // }
 
-//
+  /**
+     * الحصول على بيانات الاعتماد لتسجيل الدخول من الطلب.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
     protected function credentials(Request $request)
     {
-        $login = $request->input('login');
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
         return [
-            $field => $login,
+            'user_name' => $request->input('user_name'),
             'password' => $request->input('password'),
         ];
     }
 
-   
+ 
+    /**
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return bool
+     */
 
+
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::attempt($this->credentials($request), $request->filled('remember'));
+    }
+
+    /**
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'user_name' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+   /**
+     * الرد عند فشل محاولة تسجيل الدخول.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'user_name' => [trans('auth.failed')],
+        ]);
+    }
+
+    /**
+     * التعامل مع طلب تسجيل الدخول.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -78,25 +125,6 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    protected function validateLogin(Request $request)
-    {
-        $request->validate([
-            'login' => 'required|string',
-            'password' => 'required|string',
-        ]);
-    }
-
-    protected function attemptLogin(Request $request)
-    {
-        return Auth::attempt($this->credentials($request), $request->filled('remember'));
-    }
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        throw ValidationException::withMessages([
-            'login' => [trans('auth.failed')],
-        ]);
-    }
 
 
 }
