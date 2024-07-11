@@ -54,31 +54,29 @@
                     <th>Delete</th>
                   </tr>
                 </thead>
-
-
                 <tbody>
+                  @foreach($beverages as $beverage )
                   <tr>
-                    <td>1 Jan 2023</td>
-                    <td>Title</td>
-                    <td>Yes</td>
-                    <td><img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit"></td>
-                    <td><img src="{{asset('adminAssets/images/delete.png')}}" alt="Delete"></td>
+                    <td>{{$beverage->created_at->format('d M Y')}}</td>
+                    <td>{{$beverage->title}}</td>
+                    <td>{{$beverage->published? 'yes':'no'}}</td>
+                    <td>
+                      <a href="{{ route('editBeverage',$beverage->id)}}">
+                        <img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit">
+                      </a>
+                    </td>
+                    <td>
+                      <form action="{{ route('deleteBeverage', $beverage->id) }}" method="post">
+                          @csrf
+                          @method('DELETE')
+                        <input type="hidden" value="{{$beverage->id}}" name="id" >
+                        <button type="submit" style="border: none; background: none;">
+                          <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
+                        </button>
+                      </form> 
+                    </td>
                   </tr>
-                  <tr>
-                    <td>1 Jan 2023</td>
-                    <td>Title</td>
-                    <td>Yes</td>
-                    <td><img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit"></td>
-                    <td><img src="{{asset('adminAssets/images/delete.png')}}" alt="Delete"></td>
-                  </tr>
-                  <tr>
-                    <td>1 Jan 2023</td>
-                    <td>Title</td>
-                    <td>Yes</td>
-                    <td><img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit"></td>
-                    <td><img src="{{asset('adminAssets/images/delete.png')}}" alt="Delete"></td>
-                  </tr>
-                  
+                  @endforeach
                 </tbody>
               </table>
             </div>

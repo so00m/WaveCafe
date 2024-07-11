@@ -41,13 +41,18 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+                        <form action="{{ route('insertCategory') }}" method="post" enctype="multipart/form-data"   id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            @csrf
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="add-category">Add Category <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="add-category">
+                                    Add Category <span class="required">*</span>
                                 </label>
+                                
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="add-category" required="required" class="form-control ">
+                                    <input type="text" name="name" value="{{ old('name') }}" id="add-category"  required="required" class="form-control ">
+                                    <p style="color:rgb(117, 2, 2) ;waight:bold">
+                                        @error('name'){{ $message }}@enderror
+                                    </p>
                                 </div>
                             </div>
                             

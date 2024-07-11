@@ -7,13 +7,22 @@
       <form action="{{route('insertMessage')}}" method="post" id="contact-form">
         @csrf
         <div class="tm-form-group">
-          <input type="text" name="full_name" class="tm-form-control" placeholder="Name" required="" />
+          <input type="text" name="full_name" class="tm-form-control" placeholder="Name"  />
+          @error('full_name')
+            <strong>{{ $message }}</strong>
+          @enderror
         </div>
         <div class="tm-form-group">
-          <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+          <input type="email" name="email" class="tm-form-control" placeholder="Email" />
+          @error('email')
+            <strong>{{ $message }}</strong>
+          @enderror
         </div>        
         <div class="tm-form-group tm-mb-30">
-          <textarea rows="6" name="content" class="tm-form-control" placeholder="Message" required=""></textarea>
+          <textarea rows="6" name="content" class="tm-form-control" placeholder="Message" ></textarea>
+          @error('content')
+            <strong>{{ $message }}</strong>
+          @enderror
         </div>        
         <div>
           <button type="submit" class="tm-btn-primary tm-align-right">

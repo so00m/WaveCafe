@@ -43,14 +43,20 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+									<form  action="{{ route('updateCategory' , $category->id) }}" method="post"
+										  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+										  @csrf
+										@method('PUT')
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="add-category">Edit Category <span class="required">*</span>
 											</label>
+											<p style="color:rgb(117, 2, 2)">
+												@error('name'){{ $message }}@enderror
+											</p>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="add-category" required="required" class="form-control ">
+												<input type="text" id="add-category" name="name"  value="{{ old('name', $category->name) }}" required="required" class="form-control ">
 											</div>
+
 										</div>
 										
 										<div class="ln_solid"></div>

@@ -54,17 +54,25 @@
 
 
                 <tbody>
-                  <tr>
-                    <td>Category</td>
-                    <td><img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit"></td>
-                    <td><img src="{{asset('adminAssets/images/delete.png')}}" alt="Delete"></td>
+                  @foreach($categories as $category )
+                  <td>{{$category->name}}</td>
+                    <td>
+                      <a href="{{ route('editCategory', $category->id)}}">
+                        <img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit">
+                      </a>
+                    </td>
+                    <td>
+                      <form action="{{ route('deleteCategory', $category->id) }}" method="post">
+                          @csrf
+                          @method('DELETE')
+                        <input type="hidden" value="{{$category->id}}" name="id" >
+                        <button type="submit" style="border: none; background: none;">
+                          <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
+                        </button>
+                      </form> 
+                    </td>
                   </tr>
-                  <tr>
-                    <td>Category</td>
-                    <td><img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit"></td>
-                    <td><img src="{{asset('adminAssets/images/delete.png')}}" alt="Delete"></td>
-                  </tr>
-                  
+                  @endforeach
                 </tbody>
               </table>
             </div>

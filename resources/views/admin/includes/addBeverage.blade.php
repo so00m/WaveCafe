@@ -41,62 +41,85 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <form action="{{ route('insertBeverage') }}" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            @csrf
+                        
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="title" required="required" class="form-control ">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span></label>
+                                <p style="color:rgb(117, 2, 2)">
+                                    @error('title'){{ $message }}@enderror
+                                </p>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" name="title" id="title" required="required" class="form-control" value="{{ old('title') }}">
                                 </div>
                             </div>
+                        
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <textarea id="content" name="content" required="required" class="form-control">Contents</textarea>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span></label>
+                                <p style="color:rgb(117, 2, 2)">
+                                    @error('content'){{ $message }}@enderror
+                                </p>
+                                <div class="col-md-6 col-sm-6">
+                                    <textarea id="content" name="content" required="required" class="form-control">{{ old('content') }}</textarea>
                                 </div>
                             </div>
+                        
                             <div class="item form-group">
                                 <label for="price" class="col-form-label col-md-3 col-sm-3 label-align">Price <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input id="price" class="form-control" type="number" name="price" required="required">
+                                <p style="color:rgb(117, 2, 2)">
+                                    @error('price'){{ $message }}@enderror
+                                </p>
+                                <div class="col-md-6 col-sm-6">
+                                    <input id="price" class="form-control" type="number" name="price" required="required" value="{{ old('price') }}">
                                 </div>
                             </div>
+                        
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
-                                <div class="checkbox">
+                                <div class="col-md-6 col-sm-6">
                                     <label>
-                                        <input type="checkbox" class="flat">
+                                        <input type="checkbox" class="flat" name="published" {{ old('published') ? 'checked' : '' }}>
                                     </label>
                                 </div>
                             </div>
+                        
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Special</label>
-                                <div class="checkbox">
+                                <div class="col-md-6 col-sm-6">
                                     <label>
-                                        <input type="checkbox" class="flat">
+                                        <input type="checkbox" class="flat" name="special" {{ old('special') ? 'checked' : '' }}>
                                     </label>
                                 </div>
                             </div>
+                        
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
                                     <input type="file" id="image" name="image" required="required" class="form-control">
                                 </div>
+                                <p style="color:rgb(117, 2, 2)">
+                                    @error('image'){{ $message }}@enderror
+                                </p>
                             </div>
-
+                        
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Category <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" name="category" id="">
-                                        <option value=" ">Select Category</option>
-                                        <option value="cat1">Category 1</option>
-                                        <option value="cat2">Category 2</option>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span></label>
+                                
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="form-control" name="category_id" required>
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
+                                <p style="color:rgb(117, 2, 2)">
+                                    @error('category_id'){{ $message }}@enderror
+                                </p>
                                 </div>
                             </div>
+                        
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
@@ -104,7 +127,6 @@
                                     <button type="submit" class="btn btn-success">Add</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
