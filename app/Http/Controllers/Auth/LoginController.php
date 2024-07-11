@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -54,8 +55,7 @@ class LoginController extends Controller
 
     // }
 
-  /**
-     * الحصول على بيانات الاعتماد لتسجيل الدخول من الطلب.
+    /**
      *
      * @param \Illuminate\Http\Request $request
      * @return array
@@ -65,66 +65,55 @@ class LoginController extends Controller
         return [
             'user_name' => $request->input('user_name'),
             'password' => $request->input('password'),
+
+            'active' => 1, // user must be activated 
         ];
     }
 
- 
+    /**
+         *
+         * @param \Illuminate\Http\Request $request
+         * @return void
+         */
+        protected function validateLogin(Request $request)
+        {
+            $request->validate([
+                'user_name' => 'required|string',
+                'password' => 'required|string',
+            ]);
+        }
+
+
     /**
      *
      * @param \Illuminate\Http\Request $request
      * @return bool
      */
 
-
-    protected function attemptLogin(Request $request)
-    {
-        return Auth::attempt($this->credentials($request), $request->filled('remember'));
-    }
-
-    /**
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return void
-     */
-    protected function validateLogin(Request $request)
-    {
-        $request->validate([
-            'user_name' => 'required|string',
-            'password' => 'required|string',
-        ]);
-    }
-
-   /**
-     * الرد عند فشل محاولة تسجيل الدخول.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        throw ValidationException::withMessages([
-            'user_name' => [trans('auth.failed')],
-        ]);
-    }
-
-    /**
-     * التعامل مع طلب تسجيل الدخول.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function login(Request $request)
-    {
-        $this->validateLogin($request);
-
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
-        }
-
-        return $this->sendFailedLoginResponse($request);
-    }
-
-
+     protected function attemptLogin(Request $request)
+     {
+         // التحقق من صحة بيانات الإدخال
+         $this->validateLogin($request);
+     
+         // البحث عن المستخدم بناءً على اسم المستخدم المدخل
+         $user = User::where('user_name', $request->input('user_name'))->first();
+     
+         // التحقق من حالة النشاط للمستخدم الموجود
+         if ($user && $user->active == 0) {
+             throw ValidationException::withMessages([
+                 'user_name' => 'Your account is not active. Please contact support.',
+             ]);
+         }
+     
+         // محاولة تسجيل الدخول باستخدام بيانات الاعتماد
+         if (!Auth::attempt($this->credentials($request), true)) {
+             // إذا فشلت محاولة تسجيل الدخول، إلقاء استثناء برسالة خطأ
+             throw ValidationException::withMessages([
+                 'user_name' => 'These credentials do not match our records.',
+             ]);
+         }
+     
+         return true; // تسجيل الدخول ناجح
+     }
 
 }
