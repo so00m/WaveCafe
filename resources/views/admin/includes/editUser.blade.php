@@ -43,50 +43,68 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+									<form  action="{{ route('updateUser' , $user->id) }}" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+										@csrf
+										@method('PUT')
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Full Name <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="name">
+												Full Name <span class="required">*</span>
 											</label>
+											
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text"  name="name" value="{{ old('name', $user->name) }}" id="name" required="required" class="form-control ">
+												<p style="color:rgb(117, 2, 2) ;waight:bold">
+													@error('name'){{ $message }}@enderror
+												</p>
 											</div>
 										</div>
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="user_name">Username <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="user_name">
+												Username <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="user_name" name="user_name" required="required" class="form-control">
+												<input type="text"  name="user_name" value="{{ old('user_name', $user->user_name) }}" id="user_name" required="required" class="form-control">
+												<p style="color:rgb(117, 2, 2) ;waight:bold">
+													@error('user_name'){{ $message }}@enderror
+												</p>
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="email" class="form-control" type="email" name="email" required="required">
+												<input type="email" name="email" value="{{ old('email', $user->email) }}" class="form-control" id="email"  required="required">
+												<p style="color:rgb(117, 2, 2) ;waight:bold">
+													@error('email'){{ $message }}@enderror
+												</p>
 											</div>
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat">
+													<input type="checkbox" name="active"value="{{ old('active', $user->active) }}"  class="flat">
 												</label>
 											</div>
 										</div>
+			
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" id="password" name="password" required="required" class="form-control">
+												<input type="password"  name="password" value="{{ old('password', $user->password) }}" id="password" required="required" class="form-control">
+												<p style="color:rgb(117, 2, 2) ;waight:bold">
+													@error('password'){{ $message }} @enderror
+												</p>
 											</div>
 										</div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button class="btn btn-primary" type="button">Cancel</button>
-												<button type="submit" class="btn btn-success">Update</button>
+												<button type="submit" class="btn btn-success">Add</button>
 											</div>
 										</div>
+			
 
 									</form>
 								</div>
