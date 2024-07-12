@@ -40,7 +40,7 @@ class EmailController extends Controller
 
                 Mail::to('hello@example.com')->send(new MailFromClient($data));  //send email
 
-                Notification::send(auth()->user(), new NewMessageNotification($message));
+                //Notification::send(auth()->user(), new NewMessageNotification($message));
 
                 return redirect()->back()->with('success', 'Message sent successfully!');
             

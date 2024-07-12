@@ -50,7 +50,7 @@
                                 
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="text"  name="name" value="{{ old('name') }}" id="name" required="required" class="form-control ">
-                                    <p style="color:rgb(117, 2, 2) ;waight:bold">
+                                    <p style="color:rgb(117, 2, 2) ; waight:bold">
                                         @error('name'){{ $message }}@enderror
                                     </p>
                                 </div>

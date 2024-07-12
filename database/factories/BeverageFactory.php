@@ -23,7 +23,7 @@ class BeverageFactory extends Factory
             'category_id'=>fake()->numberBetween(1,3),
             'published' =>fake()->boolean(),
             'special' =>fake()->boolean(),
-            'image' => $this->faker->image('storage/app/public/beverages', 480, 640, null, false),
+            'image' => fake()->randomElement(['1720647775','1720647710','1720472513', '1720472588', '1720473213']).'-png',
         ];
     }
 }
