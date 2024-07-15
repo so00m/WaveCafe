@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -71,6 +72,7 @@ class UserController extends Controller
             ] , $messages);
 
             $data['active']=isset($request->active);
+            $data['password']=Hash::make($request->password);
 
         User::where('id',$id)->update($data);
         return redirect()->route('dashboard')->with('success', 'User updated successfully!');

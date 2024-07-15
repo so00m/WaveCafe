@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Beverage;
 use App\Models\Message;
 use Illuminate\Database\Seeder;
+use Database\Seeders\AdminSeeder;
 
 //use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -18,14 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+       
+        $this->call(AdminSeeder::class);
         Category::factory(3)->create();
         Beverage::factory(20)->create();
-        //Message::factory(20)->create();
-        
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Message::factory(25)->create();
+        user::factory(10)->create();
+
+      
     }
 }

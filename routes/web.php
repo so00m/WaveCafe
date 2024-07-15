@@ -19,10 +19,11 @@ Route::get('index', [FrontPageController::class,'index'])->name('index');
 
 Auth::routes(['verify'=>true]);
 Route::get('/logout', function () { Auth::logout(); return redirect('login'); })->name('logout');
-Route::get('/dashboard', [HomeController::class, 'index'])->middleware('verified')->name('dashboard'); //users page
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['verified', 'checkActive'])    //users page
+                                                          ->name('dashboard'); 
 
 
-Route::prefix('admin')->middleware('verified')->group(function () {
+Route::prefix('admin')->middleware(['verified', 'checkActive'])->group(function () {
 
 //beverages resource routes
 Route::get('beverages',[BeverageController::class, 'index'])->name('beverages');
@@ -33,7 +34,6 @@ Route::put('updateBeverage/{id}', [BeverageController::class, 'update'])->name('
 Route::delete('deleteBeverage', [BeverageController::class, 'destroy'])->name('deleteBeverage');
 
 //user resource routes
-Route::get('users',[UserController::class, 'index'])->name('users');
 Route::get('addUser',[UserController::class, 'create'])->name('addUser');
 Route::post('insertUser', [UserController::class,'store'])->name('insertUser');
 Route::get('editUser/{id}', [UserController::class, 'edit'])->name('editUser');
@@ -62,6 +62,5 @@ Route::delete('deleteMessage', [EmailController::class, 'destroy'])->name('delet
 //             function() { 
 //                 auth()->user()->unreadNotifications->markAsRead(); 
 //                 return redirect()->back();
-//             }
-//             )->name('notifications.read');
+//})->name('notifications.read');
 

@@ -65,8 +65,7 @@ class LoginController extends Controller
         return [
             'user_name' => $request->input('user_name'),
             'password' => $request->input('password'),
-
-            'active' => 1, // user must be activated 
+            'active' =>1, // user should be activated to log in
         ];
     }
 
@@ -100,17 +99,22 @@ class LoginController extends Controller
      
          // التحقق من حالة النشاط للمستخدم الموجود
          if ($user && $user->active == 0) {
-             throw ValidationException::withMessages([
-                 'user_name' => 'Your account is not active. Please contact support.',
-             ]);
+            
+            throw ValidationException::withMessages([
+                 'user_name' => 'Your account is not active. 
+                                 Please contact support or login with admin account.',
+            ]);
+            
          }
      
-         // محاولة تسجيل الدخول باستخدام بيانات الاعتماد
+                // محاولة تسجيل الدخول باستخدام بيانات الاعتماد
          if (!Auth::attempt($this->credentials($request), true)) {
-             // إذا فشلت محاولة تسجيل الدخول، إلقاء استثناء برسالة خطأ
+
+                // عند فشل محاولة تسجيل الدخول 
              throw ValidationException::withMessages([
                  'user_name' => 'These credentials do not match our records.',
              ]);
+             
          }
      
          return true; // تسجيل الدخول ناجح
