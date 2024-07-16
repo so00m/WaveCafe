@@ -8,6 +8,8 @@ use App\Mail\MailFromClient;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmailController extends Controller
 {
@@ -33,14 +35,13 @@ class EmailController extends Controller
                 'full_name'=>'required|max:100|min:5',
                 'email'=>'required|email:rfc',
                 'content'=>'required'
-                ] 
-                , $messages);
+                ], $messages);
 
-                $message=Message::create($data);      //store in model
+                $storedNotification=Message::create($data);      //store in model
 
                 Mail::to('hello@example.com')->send(new MailFromClient($data));  //send email
 
-                //Notification::send(auth()->user(), new NewMessageNotification($message));
+                Notification::send(auth()->user(), new NewMessageNotification($storedNotification));
 
                 return redirect()->back()->with('success', 'Message sent successfully!');
             
@@ -53,10 +54,18 @@ class EmailController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
+    { 
         $message = Message::findOrFail($id);
-        return view('admin.showMessage' , compact('message'));
+
+        $notification = $message->notification;
+
+            if ($notification) {
+                $notification->markAsRead();
+            }
+
+        return view('admin.showMessage', compact('message'));
     }
+    
 
 
     /**
@@ -69,14 +78,23 @@ class EmailController extends Controller
         return redirect('admin/messages');
     }
 
+   
+
+
 
     public function errMsg() 
     {
          return [
-            'full_name.required'=>'Your name is missed !!',
-            'email.email'=>'please insert a valid email ',
-            'content.required'=>'write your content!!',
+            'full_name.required' => 'Full name is required',
+            'full_name.max' => 'Full name must not exceed 100 characters',
+            'full_name.min' => 'Full name must be at least 5 characters',
+            'email.required' => 'Email is required',
+            'email.email' => 'Email must be a valid email address',
+            'content.required' => 'Content is required'
         ];
     }
+
+
+
 
 }

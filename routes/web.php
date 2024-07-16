@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\NotificationsController;
 
 //Route::get('/', function () {return view('welcome');})->middleware('verified');
 
@@ -53,14 +53,11 @@ Route::post('insertMessage', [EmailController::class,'store'])->name('insertMess
 Route::get('showMessage/{id}', [EmailController::class, 'show'])->name('showMessage');
 Route::delete('deleteMessage', [EmailController::class, 'destroy'])->name('deleteMessage');
 
+// reading Notification route
+Route::post('/notifications/mark-as-read',[NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
+
 });
 
 
-// //read
 
-// Route::get('notifications/read', 
-//             function() { 
-//                 auth()->user()->unreadNotifications->markAsRead(); 
-//                 return redirect()->back();
-//})->name('notifications.read');
 

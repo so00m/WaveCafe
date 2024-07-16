@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Notification;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Message extends Model
 {
@@ -16,5 +18,14 @@ class Message extends Model
         'full_name',
         'email',
         'content',
+
     ];
+
+    public function notification()
+    {
+        
+        return $this->belongsTo(Notification::class);
+    }
+
+
 }
