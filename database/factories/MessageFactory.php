@@ -17,9 +17,9 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'full_name' => fake()-> name(),
-            'email'=> fake()->unique()->safeEmail(),
-            'content'=>fake()->sentence(),
+            'full_name' => fake()->name(),
+            'email'=> fake()->safeEmail(),  // not unique: because it may happen that same user send messages more than one time
+            'content'=>fake()->sentence(20 , false),
         ];
     }
 }

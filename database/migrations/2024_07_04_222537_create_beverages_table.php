@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('content');
-            $table->tinyInteger('price');
+            $table->decimal('price',5 , 2);
             $table->boolean('published');
             $table->string('image');
             $table->foreignId('category_id')->constrained('categories');

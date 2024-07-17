@@ -19,7 +19,7 @@ class BeverageFactory extends Factory
         return [
             'title' =>fake()-> word(),
             'content'=>fake()->sentence(10 , false),
-            'price'=>fake()->randomFloat(1, 10, 15),
+            'price'=>fake()->randomFloat(2,10,14),
             'category_id'=>fake()->numberBetween(1,3),
             'published' =>fake()->boolean(),
             'special' =>fake()->boolean(),
