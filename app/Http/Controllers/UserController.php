@@ -41,12 +41,15 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
 
-        $user = User::findOrFail($id);
-        return view('admin.showUser' , compact('user'));
-    }
+
+    // public function show(string $id)
+    // {
+
+    //     $user = User::findOrFail($id);
+    //     return view('admin.showUser' , compact('user'));
+    // }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -57,9 +60,11 @@ class UserController extends Controller
         return view('admin.editUser' , compact('user'));
     }
 
+
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
         $messages= $this->errMsg();
@@ -81,12 +86,12 @@ class UserController extends Controller
 
 
 
-    public function destroy(Request $request)
-    {
-        $id=$request->id;
-        User::where('id',$id)->delete();
-        return redirect()->route('dashboard')->with('success', 'User deleted successfully!');
-    }
+    // public function destroy(Request $request)
+    // {
+    //     $id=$request->id;
+    //     User::where('id',$id)->delete();
+    //     return redirect()->route('dashboard')->with('success', 'User deleted successfully!');
+    // }
 
 
 
@@ -101,7 +106,7 @@ class UserController extends Controller
                 'email.required' => 'Please enter your email',
                 'email.email'=>'Please insert a valid email ',
                 'email.max'=>'Too much characters',
-                'email.unique'=>'that email is registered before',
+                'email.unique'=>'That email is registered before',
                 'password.required' => 'Please enter a strong password',
                 'password.min' => 'less than 8 characters',
                 'password.max' => 'Too much characters',

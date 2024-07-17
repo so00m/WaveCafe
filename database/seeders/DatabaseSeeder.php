@@ -14,18 +14,23 @@ use Database\Seeders\AdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
+
+
+
+
     /**
      * Seed the application's database.
-     */
+     */ 
+    
+     
+
     public function run(): void
     {
-       
-        $this->call(AdminSeeder::class);
+       $this->call(AdminSeeder::class);
         Category::factory(3)->create();
         Beverage::factory(20)->create();
         Message::factory(25)->create();
         user::factory(10)->create();
-
-      
+  
     }
 }

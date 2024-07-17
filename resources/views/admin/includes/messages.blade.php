@@ -40,6 +40,17 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="card-box table-responsive">
+
+                  <!--display success messages  -->
+
+                  @if(session('success'))
+                  <div class="alert alert-success">
+                      {{ session('success') }}
+                  </div>
+                  @endif
+
+                  <!--end of the message   -->
+
                   <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
@@ -61,11 +72,11 @@
                               </a>
                             </td>  
                             <td>
-                              <form action="{{ route('deleteMessage', $message->id) }}" method="post" onsubmit="return confirm('Are you sure?')">
+                              <form action="{{ route('deleteMessage', $message->id) }}" method="post" >
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $message->id }}">
-                                <button type="submit" style="border: none; background: none;">
+                                <button type="submit" style="border: none; background: none;" onclick="return confirm('Are you sure?')" >
                                   <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
                                 </button>
                               </form>

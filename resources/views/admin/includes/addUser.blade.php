@@ -40,6 +40,16 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+
+                        <!--display error  or success messages  -->
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <!--end of the message   -->
+
+
                         <br />
                         <form action="{{ route('insertUser') }}" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                             @csrf

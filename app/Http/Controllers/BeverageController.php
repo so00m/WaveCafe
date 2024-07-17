@@ -57,7 +57,7 @@ class BeverageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id)     //not used in the project
     {
 
         $beverage = Beverage::findOrFail($id);

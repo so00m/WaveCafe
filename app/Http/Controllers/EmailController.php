@@ -43,7 +43,7 @@ class EmailController extends Controller
 
                 Notification::send(auth()->user(), new NewMessageNotification($storedNotification));
 
-                return redirect()->back()->with('success', 'Message sent successfully!');
+                return redirect()->route('index')->with('success', 'Message sent successfully!');
             
     }
 
@@ -75,7 +75,7 @@ class EmailController extends Controller
     {
         $id= $request->id;
         Message::where('id',$id)->delete();
-        return redirect('admin/messages');
+        return redirect('admin/messages')->with('success', 'Message deleted successfully!');
     }
 
    

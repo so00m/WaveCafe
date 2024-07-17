@@ -78,7 +78,7 @@
                               @csrf
                               @method('DELETE')
                               <input type="hidden" value="{{$category->id}}" name="id" >
-                              <button type="submit" style="border: none; background: none;">
+                              <button type="submit" style="border: none; background: none;" onclick="return confirm('Are you sure?')" >
                                 <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
                               </button>
                             </form>

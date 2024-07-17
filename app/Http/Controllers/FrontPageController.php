@@ -13,9 +13,11 @@ class FrontPageController extends Controller
 
         $categories = Category::get();
         $beverages  = Beverage::get();
+
         //$specialItems = Beverage::where('special', 1)->get(); 
-        // من خلال الصفحه لتجنب ارسال بيانات العمود دا مرتين بدون داعي  special تم عرض ال
-        return view('frontPages.index', compact('categories', 'beverages')); //,'specialItems'));
+        // من خلال الصفحه لتجنب ارسال بيانات العمود دا مرتين الى الصفحة بدون داعي  special تم عرض ال
+
+        return view('frontPages.index', compact('categories', 'beverages'));    //,'specialItems'));
 
     }
     

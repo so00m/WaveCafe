@@ -15,15 +15,20 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate([
-            'name' => 'admin',
-            'user_name' => 'admin',
-            'email' => 'admin@admin.com',
-            'email_verified_at' => now(),
-            'active' => 1,
-            'password' => Hash::make('12345678'),
-            'remember_token' => Str::random(10),
-        ]);
+
+        $admin=User::where('user_name', 'admin');
         
+            if(!$admin){                  //run one time and prevent from errors when seeding twice when seeding with 'db:seed'
+
+                User::firstOrCreate([
+                        'name' => 'admin',
+                        'user_name' => 'admin',
+                        'email' => 'admin@admin.com',
+                        'email_verified_at' => now(),
+                        'active' => 1,
+                        'password' => Hash::make('12345678'),
+                        'remember_token' => Str::random(10),
+                    ]); 
+            }      
     }
 }

@@ -81,8 +81,8 @@ class CategoryController extends Controller
         $id=$request->id;
         $category = Category::find($id);
 
-        if ($category->beverages()->count() > 0) {
-            return redirect()->route('categories')->with('error','Not allowed to delete this , because it contains items underneath it');
+        if (count($category->beverages)> 0) {
+            return redirect()->route('categories')->with('error','This category can not be deleted!! , because it contains items underneath it');
         }
 
         $category->delete();

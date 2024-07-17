@@ -15,8 +15,8 @@
         @foreach($beverages as $beverage)
           @if ($beverage->category_id  == $category->id )
             <div class="tm-list-item">
-              <img src="{{asset('assets/images/'.$beverage->image)}}" alt="Image" class="tm-list-item-img">
-              <div class="tm-black-bg tm-list-item-text">
+              <img src="{{asset('assets/images/'.$beverage->image)}}" alt="Image" class="tm-list-item-img"  >
+              <div class="tm-black-bg tm-list-item-text" >
                 <h3 class="tm-list-item-name">{{$beverage->title}} <span class="tm-list-item-price">${{$beverage->price}}</span></h3>
                 <p class="tm-list-item-description">{{$beverage->content}}</p>
               </div>

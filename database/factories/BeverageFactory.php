@@ -18,14 +18,15 @@ class BeverageFactory extends Factory
     {
         return [
             'title' =>fake()-> word(),
-            'content'=>fake()->sentence(),
-            'price'=>fake()->randomFloat(2, 5, 15),
+            'content'=>fake()->sentence(10 , false),
+            'price'=>fake()->randomFloat(1, 10, 15),
             'category_id'=>fake()->numberBetween(1,3),
             'published' =>fake()->boolean(),
             'special' =>fake()->boolean(),
-            'image' => fake()->randomElement(['1720861982','1720862020','1720862053' ,'1720862104']).'-png',   
-                                //image('public/assets/images', 640, 480, 'cats'),
-                                //image(null,640, 480)
+            'image' => fake()->randomElement(['1720861982','1720862020','1720862053' ,'1720862104',
+                                              '1721213398' ,'1721226482' ]).'-png',   
+                                //image('public/assets/images', 640, 480, 'cats'), // 
+                                //image(null,640, 480)  
         ];
     }
 }

@@ -45,57 +45,59 @@
                     <div class="col-sm-12">
                       <div class="card-box table-responsive">
 
-                  
-                  <!--display error messages  -->
-                  @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                  @endif 
-                  <!--end of the message   -->
-
+                        <!--display error messages  -->
+                        @if(session('error'))
+                          <div class="alert alert-danger">
+                              {{ session('error') }}
+                          </div>
+                        @endif 
       
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <!--end of the message   -->
 
-
-              <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>Beverage Date</th>
-                    <th>Title</th>
-                    <th>Published</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($beverages as $beverage )
-                  <tr>
-                    <td>{{$beverage->created_at->format('d M Y')}}</td>
-                    <td>{{$beverage->title}}</td>
-                    <td>{{$beverage->published? 'yes':'no'}}</td>
-                    <td>
-                      <a href="{{ route('editBeverage',$beverage->id)}}">
-                        <img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit">
-                      </a>
-                    </td>
-                    <td>
-                      <form action="{{ route('deleteBeverage', $beverage->id) }}" method="post">
-                          @csrf
-                          @method('DELETE')
-                        <input type="hidden" value="{{$beverage->id}}" name="id" >
-                        <button type="submit" style="border: none; background: none;">
-                          <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
-                        </button>
-                      </form> 
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-            </div>
-        </div>
-      </div>
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>Beverage Date</th>
+                              <th>Title</th>
+                              <th>Published</th>
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach($beverages as $beverage )
+                            <tr>
+                              <td>{{$beverage->created_at->format('d M Y')}}</td>
+                              <td>{{$beverage->title}}</td>
+                              <td>{{$beverage->published? 'yes':'no'}}</td>
+                              <td>
+                                <a href="{{ route('editBeverage',$beverage->id)}}">
+                                  <img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit">
+                                </a>
+                              </td>
+                              <td>
+                                <form action="{{ route('deleteBeverage', $beverage->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                  <input type="hidden" value="{{$beverage->id}}" name="id" >
+                                  <button type="submit" style="border: none; background: none;" onclick="return confirm('Are you sure?')" >
+                                    <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
+                                  </button>
+                                </form> 
+                              </td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                      </div>
+                  </div>
+                </div>
           </div>
         </div>
       </div>
