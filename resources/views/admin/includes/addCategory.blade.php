@@ -40,6 +40,22 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                            <!--display error  or success messages  -->
+                            @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <!--end of the message   -->
+
+
+
                         <br />
                         <form action="{{ route('insertCategory') }}" method="post" enctype="multipart/form-data"   id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                             @csrf

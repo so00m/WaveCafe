@@ -44,6 +44,19 @@
                 <div class="row">
                     <div class="col-sm-12">
                       <div class="card-box table-responsive">
+
+                  
+                  <!--display error messages  -->
+                  @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                  @endif 
+                  <!--end of the message   -->
+
+      
+
+
               <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                   <tr>

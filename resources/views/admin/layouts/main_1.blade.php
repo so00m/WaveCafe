@@ -5,6 +5,7 @@
 	</head>
 
 	<body class="nav-md">
+		
 		<div class="container body">
 			<div class="main_container">
 				<div class="col-md-3 left_col">
@@ -30,14 +31,17 @@
 						<!-- /menu footer buttons -->
 					</div>
 				</div>
-
+				
 				<!-- top navigation -->
 				@include('admin.includes.top_navigation')
 				<!-- /top navigation -->
 
+
+
 				<!-- page content -->
 				@yield('content')
 				<!-- /page content -->
+
 
 				<!-- footer content -->
 				@include('admin.includes.footer')

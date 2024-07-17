@@ -79,7 +79,13 @@ class CategoryController extends Controller
     public function destroy(Request $request)
     {
         $id=$request->id;
-        Category::where('id',$id)->delete();
+        $category = Category::find($id);
+
+        if ($category->beverages()->count() > 0) {
+            return redirect()->route('categories')->with('error','Not allowed to delete this , because it contains items underneath it');
+        }
+
+        $category->delete();
         return redirect()->route('categories')->with('success', 'Category deleted successfully!');
     }
 
