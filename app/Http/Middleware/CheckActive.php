@@ -16,18 +16,16 @@ class CheckActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-       
-        if (Auth::check()) {
-          
-            $user = Auth::user();
-
-            
-            if ($user->active == 0) {
-                Auth::logout();
-                return redirect('/logout')->with('warning', 'Your account has been added successfully, waiting for the admin to make it active');
-            }
-        }
-
-        return $next($request);
+        if (Auth::check()){
+                $user = Auth::user();
+                if ($user->active == 0){
+                        Auth::logout();
+                        return redirect('/login')->with('success', 'Your account has been added successfully, waiting for the admin to make it active');
+                                        }
+                            }
+                        return $next($request);
     }
 }
+
+
+

@@ -9,7 +9,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationsController;
 
-//Route::get('/', function () {return view('welcome');})->middleware('verified');
+//Route::get('/', function () {return view('welcome');});
 
 //site routes
 
@@ -19,10 +19,10 @@ Route::get('index', [FrontPageController::class,'index'])->name('index');
 
 Auth::routes(['verify'=>true]);
 Route::get('/logout', function () { Auth::logout(); return redirect('login'); })->name('logout');
-Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['verified', 'checkActive'])    //users page
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['verified', 'checkActive'])    //home page-users page
                                                           ->name('dashboard'); 
 
-
+                                                          
 Route::prefix('admin')->middleware(['verified', 'checkActive'])->group(function () {
 
 //beverages resource routes

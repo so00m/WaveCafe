@@ -3,7 +3,7 @@
 	<head>
 		@include('admin.includes.head2')
 	</head>
-	<body>
+	<body class="login" >
 				<!-- page content -->
 				@yield('content')
 				<!-- /page content -->

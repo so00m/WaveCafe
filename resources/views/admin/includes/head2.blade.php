@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Beverages Admin | Login/Register</title>
+<title>@yield('title')</title>
 
 <!-- Bootstrap -->
 <link href="{{ asset('adminAssets/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -17,3 +17,4 @@
 
 <!-- Custom Theme Style -->
 <link href="{{ asset('adminAssets/build/css/custom.min.css')}}" rel="stylesheet">
+
