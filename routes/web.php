@@ -19,7 +19,7 @@ Route::get('index', [FrontPageController::class,'index'])->name('index');
 
 Auth::routes(['verify'=>true]);
 Route::get('/logout', function () { Auth::logout(); return redirect('login'); })->name('logout');
-Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['verified', 'checkActive'])    //home page-users page
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['verified','checkActive'])    //home page-users page
                                                           ->name('dashboard'); 
 
                                                           
