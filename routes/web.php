@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\NotificationController;
 
 //Route::get('/', function () {return view('welcome');});
 
@@ -54,7 +54,7 @@ Route::get('showMessage/{id}', [EmailController::class, 'show'])->name('showMess
 Route::delete('deleteMessage', [EmailController::class, 'destroy'])->name('deleteMessage');
 
 // reading Notification route
-Route::post('/notifications/mark-as-read',[NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
+Route::post('/notifications/mark-as-read',[NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 
 });
 

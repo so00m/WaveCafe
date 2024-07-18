@@ -69,7 +69,7 @@ crossorigin="anonymous"></script>
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
