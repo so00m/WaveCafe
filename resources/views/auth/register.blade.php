@@ -1,7 +1,10 @@
-@extends('admin.layouts.main_2')
-@section('title','Beverages Admin | Login/Register')
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		@include('admin.includes.head2')
+	</head>
+	<body class="login" >
+	
 
   @if(session()->has('success'))   
       <div class="alert alert-success">
@@ -140,5 +143,7 @@
     
     </div>
   </div>
+		
+	</body>
+</html>
 
- @endsection
