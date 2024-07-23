@@ -7,7 +7,7 @@
       <form action="{{route('insertMessage')}}" method="post" id="contact-form">
         @csrf
         <div class="tm-form-group">
-          <input type="text" name="full_name" value="{{old('full_name')}}" class="tm-form-control" placeholder="Name"  />
+          <input type="text" name="full_name" value="{{old('full_name')}}" class="tm-form-control" placeholder="Full Name"  />
           
           <p style="color:rgb(224, 0, 0);font-size:75%;font-weight: 600">
             @error('full_name'){{ $message }}@enderror
@@ -25,13 +25,12 @@
         </div>  
 
         <div class="tm-form-group tm-mb-30">
-          <textarea rows="6" name="content"  class="tm-form-control" placeholder="Message" >{{old('content')}}</textarea>
-          
+          <textarea rows="6" name="content"  class="tm-form-control" placeholder="Message" >
+            {{old('content')}}
+          </textarea>
           <p style="color:rgb(224, 2, 2);font-size:75%;font-weight: 600" > 
             @error('content'){{ $message }}@enderror
           </p>
-          
-
         </div>      
           
         <div>

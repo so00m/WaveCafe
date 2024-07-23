@@ -6,9 +6,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Mail\MailFromClient;
 use Illuminate\Support\Facades\Mail;
-use App\Notifications\NewMessageNotification;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 
 class EmailController extends Controller
@@ -16,7 +14,7 @@ class EmailController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index()     //messages list
     {
         $messages =Message::get();
         return view ('admin.messages' , compact('messages'));
@@ -29,22 +27,27 @@ class EmailController extends Controller
 
     public function store(Request $request)                
     {
-        $messages= $this->errMsg();
 
-        $data =$request->validate([
-                'full_name'=>'required|max:100|min:5',
-                'email'=>'required|email:rfc',
-                'content'=>'required'
-                ], $messages);
+        $messages = $this->errMsg();
 
-                $storedNotification=Message::create($data);      //store in model
+        $data = $request->validate([
+            'full_name' => 'required|max:100|min:5',
+            'email' => 'required|email:rfc',
+            'content' => 'required'
+        ], $messages);
 
-                Mail::to('hello@example.com')->send(new MailFromClient($data));  //send email
+        $mssg = Message::create($data);
+        Mail::to('hello@example.com')->send(new MailFromClient($data));
 
-                Notification::send(auth()->user(), new NewMessageNotification($storedNotification));
-
-                return redirect()->route('index')->with('success', 'Message sent successfully!');
-            
+        $notification = new Notification();
+        $notification->full_name = $data['full_name'];
+        $notification->content = $data['content'];
+        $notification->created_at = $mssg->created_at; 
+        $notification->message_id= $mssg->id;
+        $notification->is_read = 0;
+        $notification->save();
+        
+        return redirect()->route('index');
     }
 
   
@@ -54,15 +57,11 @@ class EmailController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    { 
+    {  
         $message = Message::findOrFail($id);
-
-        $notification = $message->notification;
-
-            if ($notification) {
-                $notification->markAsRead();
-            }
-
+        $notification = Notification::where('message_id', $id)->first();
+        $notification->is_read = 1;
+        $notification->save();
         return view('admin.showMessage', compact('message'));
     }
     
@@ -74,7 +73,9 @@ class EmailController extends Controller
     public function destroy(Request $request)
     {
         $id= $request->id;
-        Message::where('id',$id)->delete();
+        $message = Message::findOrFail($id);
+        $message->notification()->delete();
+        $message->delete();
         return redirect('admin/messages')->with('success', 'Message deleted successfully!');
     }
 

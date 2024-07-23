@@ -18,14 +18,12 @@ class Message extends Model
         'full_name',
         'email',
         'content',
-
     ];
+
 
     public function notification()
     {
-        
-        return $this->belongsTo(Notification::class);
+        return $this->hasOne(Notification::class);
     }
-
 
 }

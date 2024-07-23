@@ -75,11 +75,14 @@
                               <td>{{$beverage->created_at->format('d M Y')}}</td>
                               <td>{{$beverage->title}}</td>
                               <td>{{$beverage->published? 'yes':'no'}}</td>
+
+
                               <td>
                                 <a href="{{ route('editBeverage',$beverage->id)}}">
                                   <img src="{{asset('adminAssets/images/edit.png')}}" alt="Edit">
                                 </a>
                               </td>
+
                               <td>
                                 <form action="{{ route('deleteBeverage', $beverage->id) }}" method="post">
                                     @csrf
@@ -89,6 +92,8 @@
                                     <img src="{{ asset('adminAssets/images/delete.png') }}" alt="Delete">
                                   </button>
                                 </form> 
+
+
                               </td>
                             </tr>
                             @endforeach
