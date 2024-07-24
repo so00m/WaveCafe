@@ -43,18 +43,18 @@
                                             <img src="{{ asset('adminAssets/images/img.jpg') }}" alt="Profile Image" />
                                         </span>
                                         <span>
-                                            <span> {{ \Illuminate\Support\Str::limit($notification->full_name, 10) }}</span>
+                                            <span> {{ \Illuminate\Support\Str::limit($notification->full_name, 20) }}</span>
                                             <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
                                         </span>
                                         <span class="message">
-                                            {{ \Illuminate\Support\Str::limit($notification->content, 100) }}
+                                            {{ \Illuminate\Support\Str::limit($notification->content,40) }}
                                         </span>
                                     </a>
                                 </li>
                             @endforeach
                             <li class="nav-item">
                                 <div class="text-center">
-                                    <a class="dropdown-item">
+                                    <a href="{{route('messages')}}" class="dropdown-item">
                                         <strong>See All Alerts</strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
@@ -69,7 +69,6 @@
                                 </a>
                             </li>
                         @endif
-                        
                     </ul> 
                 </li>
             </ul>  

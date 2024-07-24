@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('image');
             $table->foreignId('category_id')->constrained('categories');
             $table->boolean('special');
-            $table->softDeletes();
             $table->timestamps();
     
         });

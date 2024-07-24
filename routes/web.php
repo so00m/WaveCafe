@@ -56,8 +56,3 @@ Route::prefix('admin')->middleware(['verified', 'checkActive'])->group(function 
 });
 
  Route::post('insertMessage', [EmailController::class,'store'])->name('insertMessage');
-
-//reading Notification route
-
-
-Route::post('/notifications/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');

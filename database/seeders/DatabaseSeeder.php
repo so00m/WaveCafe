@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
     {
        $this->call(AdminSeeder::class);
         Category::factory(3)->create();
-        Beverage::factory(20)->create();
+        Beverage::factory(40)->create();
         Message::factory(20)->create();
         Notification::factory(Message::count())->create();
-        user::factory(10)->create();
+        user::factory(20)->create();
   
     }
 }
